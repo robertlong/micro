@@ -12,7 +12,7 @@ const args = parse(process.argv, {
   },
   boolean: ['h'],
   default: {
-    H: '0.0.0.0',
+    H: 'localhost',
     p: 3000
   }
 })
@@ -20,7 +20,7 @@ let [,, file] = args._;
 
 const help = () => {
   console.log(`Usage: micro-ws [opts] <file>
-  -H  Host to listen on   [0.0.0.0]
+  -H  Host to listen on   [localhost]
   -p  Port to listen on      [3000]
   -h  Show this help message`);
 }
@@ -75,4 +75,4 @@ const { port, host } = args
 
 serve(mod, { host, port })
 
-console.log(`> Ready! Listening on http://${host}:${port}`)
+console.log(`> Ready! Listening on ws://${host}:${port}`)

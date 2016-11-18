@@ -13,8 +13,8 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "mkdir -p dist && async-to-gen lib/index.js > dist/index.js",
-    "example:echo": "node ./examples/echo.js",
-    "example:greeter": "node ./examples/greeter.js",
+    "example:echo": "./bin/micro-ws ./examples/echo.js",
+    "example:greeter": "./bin/micro-ws ./examples/greeter.js",
     "wscat": "wscat -c ws://localhost:3000"
   },
   "xo": {
