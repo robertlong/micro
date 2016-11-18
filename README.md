@@ -23,10 +23,11 @@ module.exports = function* echo(connection) {
 }
 ```
 
-To run the microservice on port `3000`, use the `micro` command:
+To run the microservice use the `micro-ws` command:
 
 ```bash
-$ micro-ws -p 3000 echo.js
+$ npm install -g micro-websocket-experiment
+$ micro-ws echo.js
 ```
 
 To run the microservice on port `3000` and localhost instead of listening on every interface, use the `micro` command:
