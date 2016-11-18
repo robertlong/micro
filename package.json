@@ -1,7 +1,7 @@
 {
-  "name": "micro",
-  "version": "6.1.0",
-  "description": "Async HTTP microservices",
+  "name": "micro-websocket-experiment",
+  "version": "0.1.0",
+  "description": "Websocket microservice experiment using generators",
   "main": "./dist/index.js",
   "files": [
     "dist",
@@ -12,17 +12,10 @@
   },
   "scripts": {
     "prepublish": "npm run build",
-    "pretest": "npm run build",
     "build": "mkdir -p dist && async-to-gen lib/index.js > dist/index.js",
-    "test": "ava && xo"
-  },
-  "ava": {
-    "require": [
-      "async-to-gen/register"
-    ],
-    "files": [
-      "test/index.js"
-    ]
+    "example:echo": "node ./examples/echo.js",
+    "example:greeter": "node ./examples/greeter.js",
+    "wscat": "wscat -c ws://localhost:3000"
   },
   "xo": {
     "esnext": true,
@@ -39,38 +32,31 @@
     }
   },
   "bin": {
-    "micro": "./bin/micro",
-    "micro-serve": "./bin/micro"
+    "micro-ws": "./bin/micro-ws"
   },
-  "repository": "zeit/micro",
+  "repository": "robertlong/micro-websocket-experiment",
   "keywords": [
     "micro",
     "server",
     "microservice",
-    "serverless"
+    "serverless",
+    "websocket"
   ],
   "author": {
-    "name": "Zeit, Inc.",
-    "email": "team@zeit.co"
+    "name": "Robert Long"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/zeit/micro/issues"
+    "url": "https://github.com/robertlong/micro-websocket-experiment/issues"
   },
-  "homepage": "https://github.com/zeit/micro#readme",
+  "homepage": "https://github.com/robertlong/micro-websocket-experiment#readme",
   "devDependencies": {
-    "ava": "^0.16.0",
-    "request": "^2.74.0",
-    "request-promise": "^4.1.1",
-    "resumer": "0.0.0",
-    "then-sleep": "^1.0.1",
+    "wscat": "^1.0.1",
     "xo": "^0.17.0"
   },
   "dependencies": {
     "async-to-gen": "1.1.4",
-    "isstream": "0.1.2",
-    "media-typer": "0.3.0",
     "minimist": "1.2.0",
-    "raw-body": "2.1.7"
+    "ws": "^1.1.1"
   }
 }

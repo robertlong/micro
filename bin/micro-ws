@@ -19,7 +19,7 @@ const args = parse(process.argv, {
 let [,, file] = args._;
 
 const help = () => {
-  console.log(`Usage: micro [opts] <file>
+  console.log(`Usage: micro-ws [opts] <file>
   -H  Host to listen on   [0.0.0.0]
   -p  Port to listen on      [3000]
   -h  Show this help message`);
@@ -36,14 +36,14 @@ if (!file) {
     file = packageJson.main || 'index.js'
   } catch (err) {
     if ('MODULE_NOT_FOUND' !== err.code) {
-      console.error(`micro: Could not read \`package.json\`: ${err.message}`)
+      console.error(`micro-ws: Could not read \`package.json\`: ${err.message}`)
       process.exit(1)
     }
   }
 }
 
 if (!file) {
-  console.error('micro: Please supply a file.')
+  console.error('micro-ws: Please supply a file.')
   help();
   process.exit(1)
 }
@@ -62,20 +62,17 @@ try {
     mod = mod.default;
   }
 } catch (err) {
-  console.error(`micro: Error when importing ${file}: ${err.stack}`)
+  console.error(`micro-ws: Error when importing ${file}: ${err.stack}`)
   process.exit(1)
 }
 
 if ('function' !== typeof mod) {
-  console.error(`micro: "${file}" does not export a function.`)
+  console.error(`micro-ws: "${file}" does not export a function.`)
   process.exit(1)
 }
 
 const { port, host } = args
-serve(mod).listen(port, host, err => {
-  if (err) {
-    console.error('micro:', err.stack)
-    process.exit(1)
-  }
-  console.log(`> Ready! Listening on http://${host}:${port}`)
-})
+
+serve(mod, { host, port })
+
+console.log(`> Ready! Listening on http://${host}:${port}`)
